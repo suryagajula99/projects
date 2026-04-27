@@ -1,0 +1,46 @@
+class find_number:
+    def __init__(self, num1, num2):
+        self.num1 = num1   
+        self.num2 = num2
+    def sorting_series(self,lst:list): 
+        a=0
+        while a<len(lst):
+            for i in range(len(lst)):
+                if i+1<len(lst) and lst[i]>lst[i+1]:
+                    lst[i],lst[i+1]=lst[i+1],lst[i]
+                else:
+                    pass
+            a+=1
+        print("Sorted list:", lst)
+        return lst
+    def series_numbers(self, num1=None, num2=None):
+        if num1 is None:
+            num1 = self.num1
+        if num2 is None:
+            num2 = self.num2
+
+        lst = []
+
+        # add individual digits
+        for i in num1:
+            lst.append(i)
+
+        # create combinations like 12, 13, 23
+        for i in range(len(num1)):
+            for j in range(i + 1, len(num1)):
+                lst.append(num1[i] + num1[j])   # string concatenation
+
+        # convert everything to int
+        lst = [int(i) for i in lst]
+        lst_sorted=self.sorting_series(lst)
+        
+        for i in lst_sorted:
+            if i > num2:
+                print("First greater number:", i)
+                break
+
+if __name__ == "__main__":
+    Input_num1 = input("Enter digits (e.g., 123): ")
+    Input_num2 = int(input("Enter a number: "))
+    obj = find_number(Input_num1, Input_num2)
+    obj.series_numbers()
